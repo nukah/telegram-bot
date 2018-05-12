@@ -68,7 +68,7 @@ module Telegram
       # Params are not used directly but kept for instrumentation purpose.
       # You probably don't want to use this method directly.
       def http_request(uri, body)
-        http_client.post(uri, body)
+        Telegram.http_client.post(uri, body)
       end
 
       def inspect
