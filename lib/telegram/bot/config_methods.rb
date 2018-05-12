@@ -5,7 +5,7 @@ module Telegram
   module Bot
     module ConfigMethods
       # Overwrite config.
-      attr_writer :bots_config
+      attr_writer :bots_config, :http_client
 
       # Keep this setting here, so we can avoid loading Bot::UpdatesPoller
       # when polling is disabled.
@@ -43,6 +43,10 @@ module Telegram
       # Hash of botan clients made from #bots.
       def botans
         @botans ||= bots.map { |k, v| [k, v.botan] }.to_h
+      end
+
+      def http_client
+        @http_client ||= HTTPClient.new
       end
 
       # Returns config for .bots method. By default uses `telegram['bots']` section

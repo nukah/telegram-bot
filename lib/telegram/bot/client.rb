@@ -50,10 +50,9 @@ module Telegram
         end
       end
 
-      attr_reader :client, :token, :username, :base_uri
+      attr_reader :token, :username, :base_uri
 
       def initialize(token = nil, username = nil, **options)
-        @client = HTTPClient.new
         @token = token || options[:token]
         @username = username || options[:username]
         @base_uri = format(URL_TEMPLATE, token: self.token)
@@ -69,7 +68,7 @@ module Telegram
       # Params are not used directly but kept for instrumentation purpose.
       # You probably don't want to use this method directly.
       def http_request(uri, body)
-        client.post(uri, body)
+        http_client.post(uri, body)
       end
 
       def inspect
